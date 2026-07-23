@@ -1,0 +1,20 @@
+{
+  "name": "camping-scout",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Scan ReserveCalifornia for available campsites matching date patterns (e.g. any 1-night Sat->Sun weekend).",
+  "type": "module",
+  "scripts": {
+    "scan": "tsx src/scan.ts",
+    "find": "tsx src/find.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3",
+    "@types/node": "^22.9.0"
+  }
+}
