@@ -1,68 +1,115 @@
 # CampingScout 🏕️
 
-A tiny Node + TypeScript tool that scouts **ReserveCalifornia** for open campsites
-matching date patterns you care about — e.g. *"any 1-night Saturday→Sunday at
-Crystal Cove's Moro Campground in the next 6 months."*
+Find open campsites in California state parks. CampingScout watches ReserveCalifornia for cancellations and openings matching date patterns you care about (e.g. *any 1-night Saturday at Crystal Cove's Moro Campground*) and will notify you when something opens up.
 
-It only **reads** availability and prints what's open. You still book on the
-official site. See [`API.md`](./API.md) for how the (undocumented) API works.
+Built on the same stack as [Bookshelf](https://github.com/mpphelps/Bookshelf): React Router v7, Prisma v7, Turborepo, Docker, self-hosted deployment.
 
-## Setup
+## Stack
+
+- **Framework:** React Router v7 + React 19 + TypeScript + Vite
+- **Styling:** Tailwind CSS v4 (shadcn-style components in `packages/ui`)
+- **ORM:** Prisma v7 with PostgreSQL 17 (via `@prisma/adapter-pg` driver adapter)
+- **Monorepo:** Turborepo with npm workspaces
+- **Auth:** Auth0 (OAuth 2.0 Authorization Code + PKCE)
+- **Testing:** Playwright (e2e)
+- **Deployment:** Docker + Docker Compose, self-hosted behind Cloudflare Tunnel
+
+## Layout
+
+```
+apps/web/                       React Router app (routes, services, repos, components)
+packages/database/              Prisma schema, migrations, prisma.config.ts, generated client
+packages/scanner/               ReserveCalifornia API client + availability scanner CLI (see its README)
+packages/ui/                    Shared React components (Button, Panel, etc.)
+packages/eslint-config/         Shared ESLint config
+packages/typescript-config/     Shared tsconfig
+Dockerfile                      Multi-stage build for the web app
+docker-entrypoint.sh            Runs `prisma migrate deploy`, then starts the server
+docker-compose.yml              Dev: Postgres only (dev + test DBs)
+docker-compose.prod.yml         Prod: app + Postgres (project name `camping-scout-prod`)
+```
+
+The web app follows a strict three-layer backend pattern:
+
+- **Routes** (`apps/web/app/routes/`) — thin: parse the request, call a service, return a response. No business logic.
+- **Services** (`apps/web/app/services/`) — validation, ownership checks, orchestration. Throw domain errors.
+- **Repositories** (`apps/web/app/repositories/`) — Prisma queries only. One per entity. No cross-entity joins.
+
+## Getting started
+
+### Prerequisites
+
+- Node.js ≥ 20
+- Docker Desktop
+- An Auth0 tenant (free tier)
+
+### Setup
 
 ```bash
-cd camping-scout
+# Install dependencies
 npm install
+
+# Start Postgres (dev + test DBs)
+docker compose up -d
+
+# Fill in packages/database/.env with your values:
+#   DATABASE_URL=postgresql://camping_scout:camping_scout@localhost:5434/camping_scout
+#   SESSION_SECRET=<32+ char random string>
+#   AUTH0_DOMAIN=<your-tenant>.auth0.com
+#   AUTH0_CLIENT_ID=...
+#   AUTH0_CLIENT_SECRET=...
+#   AUTH0_AUDIENCE=...
+#   AUTH0_CALLBACK_URL=http://localhost:5173/auth/callback
+
+# Apply migrations
+cd packages/database
+npx prisma migrate deploy
+cd ../..
+
+# Run the app
+npm run dev
 ```
 
-Requires Node 20+.
+App is at `http://localhost:5173`.
 
-## Use
-
-Scan for the openings defined in `src/config.ts`:
+## Common commands
 
 ```bash
-npm run scan
+# Dev (from repo root)
+npm run dev                              # Turbo: starts all apps
+npm run build                            # Turbo: builds all apps + packages
+docker compose up -d                     # Start Postgres
+docker compose down                      # Stop Postgres
+
+# Database (from packages/database)
+npx prisma migrate dev --name <name>     # Create + apply migration
+npx prisma migrate dev --create-only     # Generate SQL without applying (review first)
+npx prisma migrate deploy                # Apply pending migrations (prod-style)
+npx prisma generate                      # Regenerate client from schema
+
+# E2E tests (from apps/web)
+npm run test:e2e                         # Headless Playwright run
+npm run test:e2e:headed                  # With browser UI
+
+# Availability scanner CLI (from packages/scanner)
+npm run scan                             # One-shot scan per src/config.ts
+npm run find -- "San Onofre"             # Look up park/facility IDs
 ```
 
-Example output:
-
-```
-Scanning Crystal Cove — Moro Campground (tent/RV) (facility 447) ... bookable 2026-07-24→2027-01-23, 50 web-bookable sites
-  Sat 2026-09-12  (1n, Sat→Sun (1 night))  2 sites: Standard Campsite #21, Premium Hook Up (E/W) Campsite #3
-  Sat 2026-10-03  (1n, Sat→Sun (1 night))  5 sites: ...
-```
-
-## Configure what to look for
-
-Everything is in [`src/config.ts`](./src/config.ts):
-
-- **`locations`** — one entry per campground (a `facilityId`). Defaults to Crystal
-  Cove Moro Campground (`447`).
-- **`patterns`** — a check-in day-of-week + a number of nights. Ships with
-  `Sat→Sun (1 night)`. Uncomment `Fri→Sun (2 nights)` for full weekends.
-- **`horizonDays`** — how far ahead to look (max ~180; the API only lets you book
-  6 months out).
-- **`earliest`** — optional earliest check-in date.
-
-### Finding IDs for other parks
+## Production stack (local test)
 
 ```bash
-npm run find -- "San Onofre"
+docker compose -f docker-compose.prod.yml --env-file packages/database/.env up --build
 ```
 
-prints each matching park's `PlaceId` and the `facilityId` of every campground
-inside it. Drop the one you want into `config.ts`.
+Requires `POSTGRES_USER` / `POSTGRES_PASSWORD` / `POSTGRES_DB` in the `.env`. App is at `http://localhost:3000`; the container runs `prisma migrate deploy` on every start.
 
-## Running it on a schedule (optional next step)
+## Data model
 
-`npm run scan` is a one-shot check. To turn it into a real cancellation watcher,
-run it on a cron / launchd timer every 15–30 minutes and have it notify you only
-when something *new* appears. That layer (state + email/SMS/push) isn't built yet
-— it's the natural next increment.
+- **User** — id, email (unique), firstName, lastName, timestamps. Created on first Auth0 login.
 
-## Etiquette / caveats
+Campground watches + notification service come next (extra Docker containers for the scanner worker and notifier).
 
-- These endpoints are undocumented and can change; the client reads the current
-  API base from `reservecalifornia.com/config.json` so it survives host changes.
-- Be polite: there's a `requestDelayMs` between calls. Don't hammer it.
-- This is for personal use to save yourself from refreshing a website by hand.
+## License
+
+Personal project. No license granted.

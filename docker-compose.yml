@@ -1,0 +1,26 @@
+services:
+  db:
+    image: postgres:17
+    restart: unless-stopped
+    ports:
+      - "5434:5432"
+    environment:
+      POSTGRES_USER: camping_scout
+      POSTGRES_PASSWORD: camping_scout
+      POSTGRES_DB: camping_scout
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  db-test:
+    image: postgres:17
+    restart: unless-stopped
+    ports:
+      - "5435:5432"
+    environment:
+      POSTGRES_USER: camping_scout
+      POSTGRES_PASSWORD: camping_scout
+      POSTGRES_DB: camping_scout_test
+    volumes:
+      - pgdata_test:/var/lib/postgresql/data
+volumes:
+  pgdata:
+  pgdata_test:
