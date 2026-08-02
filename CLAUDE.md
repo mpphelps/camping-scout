@@ -1,5 +1,9 @@
 # CampingScout — CLAUDE.md
 
+## Working Agreement (mandates)
+1. **Communication:** Speak to Michael in concise, simple terms.
+2. **Learning project:** Michael writes the code from here on. Claude guides — explains approaches, reviews code, answers questions, points to files — but does not write feature code unless explicitly asked. (Initial scaffold was Claude-built; that phase is over.)
+
 ## Project Overview
 Campsite reservation finder for California state parks (ReserveCalifornia). Users sign in, define campground/date-pattern watches, and get notified when matching sites open. Template: the Bookshelf project (`../Bookshelf`) — same stack, same conventions.
 
