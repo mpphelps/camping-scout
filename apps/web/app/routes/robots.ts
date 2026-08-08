@@ -1,5 +1,5 @@
 export function loader() {
-  const body = ["User-agent: *", "Allow: /$", "Disallow: /auth/", "Disallow: /health", "", "Sitemap: https://camping-scout.example.com/sitemap.xml", ""].join(
+  const body = ["User-agent: *", "Allow: /$", "Disallow: /auth/", "Disallow: /health", "", "Sitemap: https://campingmeow.com/sitemap.xml", ""].join(
     "\n",
   );
 

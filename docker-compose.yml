@@ -5,9 +5,9 @@ services:
     ports:
       - "5434:5432"
     environment:
-      POSTGRES_USER: camping_scout
-      POSTGRES_PASSWORD: camping_scout
-      POSTGRES_DB: camping_scout
+      POSTGRES_USER: campingmeow
+      POSTGRES_PASSWORD: campingmeow
+      POSTGRES_DB: campingmeow
     volumes:
       - pgdata:/var/lib/postgresql/data
   db-test:
@@ -16,9 +16,9 @@ services:
     ports:
       - "5435:5432"
     environment:
-      POSTGRES_USER: camping_scout
-      POSTGRES_PASSWORD: camping_scout
-      POSTGRES_DB: camping_scout_test
+      POSTGRES_USER: campingmeow
+      POSTGRES_PASSWORD: campingmeow
+      POSTGRES_DB: campingmeow_test
     volumes:
       - pgdata_test:/var/lib/postgresql/data
 volumes:

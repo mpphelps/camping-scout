@@ -28,20 +28,20 @@ export const headers: Route.HeadersFunction = () => ({
 });
 
 export const meta: Route.MetaFunction = () => [
-  { title: "Camping Scout — find California campsites" },
+  { title: "Camping Meow — find California campsites" },
   {
     name: "description",
     content: "Scout California state park campgrounds for open reservations and get notified when a site you want opens up.",
   },
   { property: "og:type", content: "website" },
-  { property: "og:site_name", content: "Camping Scout" },
-  { property: "og:title", content: "Camping Scout — find California campsites" },
+  { property: "og:site_name", content: "Camping Meow" },
+  { property: "og:title", content: "Camping Meow — find California campsites" },
   {
     property: "og:description",
     content: "Scout California state park campgrounds for open reservations.",
   },
   { name: "twitter:card", content: "summary" },
-  { name: "twitter:title", content: "Camping Scout — find California campsites" },
+  { name: "twitter:title", content: "Camping Meow — find California campsites" },
   {
     name: "twitter:description",
     content: "Scout California state park campgrounds for open reservations.",
@@ -81,7 +81,7 @@ function BrandmarkHeader() {
     <header className="border-b">
       <div className="mx-auto flex max-w-5xl items-center gap-3 px-4 py-3 sm:px-6">
         <Link to="/" className="text-sm font-semibold">
-          Camping Scout
+          Camping Meow
         </Link>
       </div>
     </header>

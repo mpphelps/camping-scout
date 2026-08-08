@@ -1,6 +1,6 @@
-# CampingScout 🏕️
+# CampingMeow 🏕️
 
-Find open campsites in California state parks. CampingScout watches ReserveCalifornia for cancellations and openings matching date patterns you care about (e.g. *any 1-night Saturday at Crystal Cove's Moro Campground*) and will notify you when something opens up.
+Find open campsites in California state parks. CampingMeow watches ReserveCalifornia for cancellations and openings matching date patterns you care about (e.g. *any 1-night Saturday at Crystal Cove's Moro Campground*) and will notify you when something opens up.
 
 Built on the same stack as [Bookshelf](https://github.com/mpphelps/Bookshelf): React Router v7, Prisma v7, Turborepo, Docker, self-hosted deployment.
 
@@ -26,7 +26,7 @@ packages/typescript-config/     Shared tsconfig
 Dockerfile                      Multi-stage build for the web app
 docker-entrypoint.sh            Runs `prisma migrate deploy`, then starts the server
 docker-compose.yml              Dev: Postgres only (dev + test DBs)
-docker-compose.prod.yml         Prod: app + Postgres (project name `camping-scout-prod`)
+docker-compose.prod.yml         Prod: app + Postgres (project name `campingmeow-prod`)
 ```
 
 The web app follows a strict three-layer backend pattern:
@@ -53,7 +53,7 @@ npm install
 docker compose up -d
 
 # Fill in packages/database/.env with your values:
-#   DATABASE_URL=postgresql://camping_scout:camping_scout@localhost:5434/camping_scout
+#   DATABASE_URL=postgresql://campingmeow:campingmeow@localhost:5434/campingmeow
 #   SESSION_SECRET=<32+ char random string>
 #   AUTH0_DOMAIN=<your-tenant>.auth0.com
 #   AUTH0_CLIENT_ID=...

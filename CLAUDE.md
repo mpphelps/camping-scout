@@ -1,4 +1,4 @@
-# CampingScout — CLAUDE.md
+# CampingMeow — CLAUDE.md
 
 ## Working Agreement (mandates)
 1. **Communication:** Speak to Michael in concise, simple terms.
@@ -48,8 +48,8 @@ npx prisma migrate dev --create-only   # Generate SQL without applying (for revi
 ## Environment
 - Single `.env` in `packages/database/` — contains `DATABASE_URL`, `SESSION_SECRET`, `AUTH0_*`
 - `apps/web/vite.config.ts` has `envDir` pointing to `../../packages/database`
-- Database: `postgresql://camping_scout:camping_scout@localhost:5434/camping_scout`
-- Test database: port 5435, `camping_scout_test` — configured via `.env.test`
+- Database: `postgresql://campingmeow:campingmeow@localhost:5434/campingmeow`
+- Test database: port 5435, `campingmeow_test` — configured via `.env.test`
 
 ## Data Model
 - **User** — id, email (unique), firstName, lastName, timestamps. Synced from Auth0 on first login.
@@ -70,7 +70,7 @@ npx prisma migrate dev --create-only   # Generate SQL without applying (for revi
 - **E2E bypass:** `E2E_AUTH_BYPASS=1` enables `/auth/test-login` (404 in production)
 
 ## Testing
-- **E2E (Playwright):** `apps/web/e2e/`, runs against `camping_scout_test` DB on port 5435, app on port 5174
+- **E2E (Playwright):** `apps/web/e2e/`, runs against `campingmeow_test` DB on port 5435, app on port 5174
 - `globalSetup` runs `prisma migrate deploy`; `cleanDb` fixture truncates tables between tests
 - Suite-level auth via `test.use({ user: ... })` + `page` fixture override
 
@@ -79,7 +79,7 @@ npx prisma migrate dev --create-only   # Generate SQL without applying (for revi
 
 ## Conventions
 - Route files use React Router v7 typed conventions (`Route.LoaderArgs`, `Route.ComponentProps`)
-- Database package imported as `@camping-scout/database`
+- Database package imported as `@campingmeow/database`
 - Prisma client uses `@prisma/adapter-pg` driver adapter (required in Prisma v7)
 - Authorization checks live in the service layer, never in routes or repositories
 - ReserveCalifornia API calls must be polite: resolve base URL from `reservecalifornia.com/config.json`, delay between requests (see `packages/scanner`)

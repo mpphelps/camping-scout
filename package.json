@@ -1,5 +1,5 @@
 {
-  "name": "camping-scout",
+  "name": "campingmeow",
   "private": true,
   "scripts": {
     "build": "turbo run build",

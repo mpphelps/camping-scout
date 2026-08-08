@@ -1,4 +1,4 @@
-import { prisma } from "@camping-scout/database";
+import { prisma } from "@campingmeow/database";
 import { splitName } from "../../app/lib/name";
 
 export type CreateOwnerUserOverrides = {

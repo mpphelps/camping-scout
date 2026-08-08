@@ -1,5 +1,5 @@
 {
-  "name": "@camping-scout/scanner",
+  "name": "@campingmeow/scanner",
   "version": "0.1.0",
   "private": true,
   "description": "Scan ReserveCalifornia for available campsites matching date patterns (e.g. any 1-night Sat->Sun weekend).",

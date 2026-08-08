@@ -1,4 +1,4 @@
-# CampingScout 🏕️
+# CampingMeow 🏕️
 
 A tiny Node + TypeScript tool that scouts **ReserveCalifornia** for open campsites
 matching date patterns you care about — e.g. *"any 1-night Saturday→Sunday at
@@ -10,7 +10,7 @@ official site. See [`API.md`](./API.md) for how the (undocumented) API works.
 ## Setup
 
 ```bash
-cd camping-scout
+cd campingmeow
 npm install
 ```
 

@@ -13,9 +13,9 @@
     "test:e2e:debug": "playwright test --debug"
   },
   "dependencies": {
-    "@camping-scout/database": "*",
-    "@camping-scout/scanner": "*",
-    "@camping-scout/ui": "*",
+    "@campingmeow/database": "*",
+    "@campingmeow/scanner": "*",
+    "@campingmeow/ui": "*",
     "@react-router/node": "7.13.2",
     "@react-router/serve": "7.13.2",
     "cookie": "^0.7.2",

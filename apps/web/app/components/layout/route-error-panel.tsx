@@ -1,8 +1,8 @@
 import * as React from "react";
 import { Link } from "react-router";
 
-import { Button } from "@camping-scout/ui/components/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@camping-scout/ui/components/card";
+import { Button } from "@campingmeow/ui/components/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@campingmeow/ui/components/card";
 import { ErrorLookup } from "~/lib/errors";
 
 type RouteErrorPanelProps = {

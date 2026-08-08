@@ -1,4 +1,4 @@
-import { prisma } from "@camping-scout/database";
+import { prisma } from "@campingmeow/database";
 
 export const userRepository = {
   async findByEmail(email: string) {

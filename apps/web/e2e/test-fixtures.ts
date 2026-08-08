@@ -1,5 +1,5 @@
 import { test as base } from "@playwright/test";
-import { prisma } from "@camping-scout/database";
+import { prisma } from "@campingmeow/database";
 
 type AppOptions = {
   user: { email: string; firstName: string; lastName: string; permissions?: string[] } | null;

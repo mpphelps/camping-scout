@@ -1,11 +1,11 @@
-name: camping-scout-prod
+name: campingmeow-prod
 
 services:
   app:
     build:
       context: .
       dockerfile: Dockerfile
-    image: camping-scout:latest
+    image: campingmeow:latest
     restart: unless-stopped
     ports:
       - "3001:3000"

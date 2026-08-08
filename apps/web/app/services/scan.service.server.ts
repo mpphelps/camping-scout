@@ -1,4 +1,4 @@
-import { runScan, type ScanResult } from "@camping-scout/scanner";
+import { runScan, type ScanResult } from "@campingmeow/scanner";
 import { logger } from "~/lib/logger.server";
 
 export type { ScanResult };

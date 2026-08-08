@@ -1,4 +1,4 @@
-const SITE_URL = "https://camping-scout.example.com";
+const SITE_URL = "https://campingmeow.com";
 
 export function loader() {
   const today = new Date().toISOString().slice(0, 10);

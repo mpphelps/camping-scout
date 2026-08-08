@@ -14,7 +14,7 @@
     "components": "~/components",
     "hooks": "~/hooks",
     "lib": "~/lib",
-    "utils": "@camping-scout/ui/lib/utils",
-    "ui": "@camping-scout/ui/components"
+    "utils": "@campingmeow/ui/lib/utils",
+    "ui": "@campingmeow/ui/components"
   }
 }

@@ -7,12 +7,12 @@ test("health check returns ok status", async ({ page }) => {
 });
 
 test("test DB is empty at the start of every test", async () => {
-  const { prisma } = await import("@camping-scout/database");
+  const { prisma } = await import("@campingmeow/database");
   expect(await prisma.user.count()).toBe(0);
 });
 
 test("inserting data in one test does not leak into the next", async () => {
-  const { prisma } = await import("@camping-scout/database");
+  const { prisma } = await import("@campingmeow/database");
   createOwnerUser();
   expect(await prisma.user.findUnique({ where: { email: "owner@example.com" } })).not.toBeNull();
   expect(await prisma.user.count()).toBe(1);

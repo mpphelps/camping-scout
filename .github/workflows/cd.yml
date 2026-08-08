@@ -12,13 +12,13 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: Sync latest main
-        working-directory: /home/mpphelps/camping-scout
+        working-directory: /home/mpphelps/campingmeow
         run: |
           git fetch origin main
           git reset --hard origin/main
 
       - name: Materialize .env from GitHub Secrets
-        working-directory: /home/mpphelps/camping-scout
+        working-directory: /home/mpphelps/campingmeow
         env:
           POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
           SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
@@ -38,10 +38,10 @@ jobs:
 
           umask 077
           cat > packages/database/.env <<EOF
-          POSTGRES_USER=camping_scout
+          POSTGRES_USER=campingmeow
           POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-          POSTGRES_DB=camping_scout
-          DATABASE_URL=postgresql://camping_scout:${POSTGRES_PASSWORD}@db:5432/camping_scout
+          POSTGRES_DB=campingmeow
+          DATABASE_URL=postgresql://campingmeow:${POSTGRES_PASSWORD}@db:5432/campingmeow
           SESSION_SECRET=${SESSION_SECRET}
           AUTH0_DOMAIN=${AUTH0_DOMAIN}
           AUTH0_CLIENT_ID=${AUTH0_CLIENT_ID}
@@ -51,7 +51,7 @@ jobs:
           EOF
 
       - name: Rebuild and restart stack
-        working-directory: /home/mpphelps/camping-scout
+        working-directory: /home/mpphelps/campingmeow
         run: docker compose -f docker-compose.prod.yml --env-file packages/database/.env up -d --build
 
       - name: Wait for app to be healthy
@@ -65,7 +65,7 @@ jobs:
             sleep 2
           done
           echo "App did not become healthy within 60s"
-          docker compose -f docker-compose.prod.yml -p camping-scout-prod logs --tail=100 app
+          docker compose -f docker-compose.prod.yml -p campingmeow-prod logs --tail=100 app
           exit 1
 
       - name: Prune old Docker images

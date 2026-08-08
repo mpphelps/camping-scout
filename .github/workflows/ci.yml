@@ -19,7 +19,7 @@ jobs:
           cache: "npm"
       - run: npm ci
       - name: Generate Prisma client
-        run: npm run generate -w @camping-scout/database
+        run: npm run generate -w @campingmeow/database
       - run: npm run lint
 
   check-types:
@@ -32,7 +32,7 @@ jobs:
           cache: "npm"
       - run: npm ci
       - name: Generate Prisma client
-        run: npm run generate -w @camping-scout/database
+        run: npm run generate -w @campingmeow/database
       - run: npm run check-types
 
   build:
@@ -47,7 +47,7 @@ jobs:
           cache: "npm"
       - run: npm ci
       - name: Generate Prisma client
-        run: npm run generate -w @camping-scout/database
+        run: npm run generate -w @campingmeow/database
       - run: npm run build
 
   e2e:
@@ -59,16 +59,16 @@ jobs:
         ports:
           - 5432:5432
         env:
-          POSTGRES_USER: camping_scout
-          POSTGRES_PASSWORD: camping_scout
-          POSTGRES_DB: camping_scout
+          POSTGRES_USER: campingmeow
+          POSTGRES_PASSWORD: campingmeow
+          POSTGRES_DB: campingmeow
         options: >-
-          --health-cmd="pg_isready -U camping_scout"
+          --health-cmd="pg_isready -U campingmeow"
           --health-interval=5s
           --health-timeout=5s
           --health-retries=10
     env:
-      DATABASE_URL: "postgresql://camping_scout:camping_scout@localhost:5432/camping_scout"
+      DATABASE_URL: "postgresql://campingmeow:campingmeow@localhost:5432/campingmeow"
       SESSION_SECRET: "ci-session-secret-not-used-for-real-auth"
       E2E_AUTH_BYPASS: "1"
     steps:
@@ -79,7 +79,7 @@ jobs:
           cache: "npm"
       - run: npm ci
       - name: Generate Prisma client
-        run: npm run generate -w @camping-scout/database
+        run: npm run generate -w @campingmeow/database
       - name: Install Playwright browsers
         run: npx playwright install --with-deps chromium
         working-directory: apps/web

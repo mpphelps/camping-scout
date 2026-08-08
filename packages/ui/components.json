@@ -11,10 +11,10 @@
   },
   "iconLibrary": "lucide",
   "aliases": {
-    "components": "@camping-scout/ui/components",
-    "utils": "@camping-scout/ui/lib/utils",
-    "hooks": "@camping-scout/ui/hooks",
-    "lib": "@camping-scout/ui/lib",
-    "ui": "@camping-scout/ui/components"
+    "components": "@campingmeow/ui/components",
+    "utils": "@campingmeow/ui/lib/utils",
+    "hooks": "@campingmeow/ui/hooks",
+    "lib": "@campingmeow/ui/lib",
+    "ui": "@campingmeow/ui/components"
   }
 }

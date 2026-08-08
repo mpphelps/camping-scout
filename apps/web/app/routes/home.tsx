@@ -1,7 +1,7 @@
 import { Link, useFetcher } from "react-router";
 
-import { Button } from "@camping-scout/ui/components/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@camping-scout/ui/components/card";
+import { Button } from "@campingmeow/ui/components/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@campingmeow/ui/components/card";
 import type { Route } from "./+types/home";
 import { getAuthenticatedUser } from "~/services/auth.service.server";
 import { runAvailabilityScan } from "~/services/scan.service.server";
@@ -27,7 +27,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
       <header className="border-b">
         <div className="mx-auto flex max-w-5xl items-center justify-between gap-3 px-4 py-3 sm:px-6">
           <Link to="/" className="text-sm font-semibold">
-            Camping Scout
+            Camping Meow
           </Link>
           <div className="flex items-center gap-3">
             {user ? (
@@ -50,7 +50,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
         <div className="mb-8">
           <h1 className="text-2xl font-semibold tracking-tight">Find open California campsites</h1>
           <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-            Camping Scout checks ReserveCalifornia for openings that match the dates you care about. Right now it runs a fixed search:
+            Camping Meow checks ReserveCalifornia for openings that match the dates you care about. Right now it runs a fixed search:
             Crystal Cove — Moro Campground, any Saturday night in the next 6 months.
           </p>
         </div>

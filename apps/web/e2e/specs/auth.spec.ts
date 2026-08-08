@@ -10,7 +10,7 @@ test.describe("authentication", () => {
 
   test("creates a user in the database when logging in with test credentials", async ({ page }) => {
     await page.goto("/");
-    const { prisma } = await import("@camping-scout/database");
+    const { prisma } = await import("@campingmeow/database");
     const user = await prisma.user.findUnique({ where: { email: "test@example.com" } });
     await expect(user).not.toBeNull();
   });
