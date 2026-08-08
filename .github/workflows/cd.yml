@@ -57,7 +57,7 @@ jobs:
       - name: Wait for app to be healthy
         run: |
           for i in {1..30}; do
-            if curl -fs http://localhost:3000/health > /dev/null; then
+            if curl -fs http://localhost:3001/health > /dev/null; then
               echo "App responded to /health"
               exit 0
             fi

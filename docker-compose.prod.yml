@@ -8,7 +8,7 @@ services:
     image: camping-scout:latest
     restart: unless-stopped
     ports:
-      - "3000:3000"
+      - "3001:3000"
     env_file:
       - packages/database/.env
     depends_on:
